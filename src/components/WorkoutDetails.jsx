@@ -1,6 +1,9 @@
 import React from 'react';
 import { useWorkoutContext } from '../hooks/useWorkoutsContext';
 
+// Date FNS
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+
 const WorkoutDetails = ({ workout }) => {
 	const { dispatch } = useWorkoutContext();
 	const handleClick = async (e) => {
@@ -24,9 +27,13 @@ const WorkoutDetails = ({ workout }) => {
 				<strong>Reps (kg): </strong>
 				{workout.reps}
 			</p>
-			<p>{workout.createdAt}</p>
+			<p>
+				{formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true })}
+			</p>
 
-			<span onClick={handleClick}>delete</span>
+			<span className='material-symbols-outlined' onClick={handleClick}>
+				delete
+			</span>
 		</div>
 	);
 };
